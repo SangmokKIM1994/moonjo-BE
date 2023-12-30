@@ -13,4 +13,8 @@ export class CreateManagerDto {
   @ApiResponseProperty({ example: "tkdahr45" })
   @IsString()
   password: string;
+
+  @ApiResponseProperty({ example: "yeong0319@naver.com" })
+  @IsString()
+  email: string;
 }
