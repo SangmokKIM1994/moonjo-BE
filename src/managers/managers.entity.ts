@@ -27,4 +27,7 @@ export class Managers {
       );
     }
   }
+
+  @Column()
+  email: string;
 }
