@@ -5,7 +5,7 @@ import { InternalServerErrorException } from "@nestjs/common";
 @Entity()
 export class Managers {
   @PrimaryGeneratedColumn()
-  mamangerId: number;
+  managerId: number;
 
   @Column()
   name: string;
