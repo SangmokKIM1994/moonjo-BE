@@ -25,4 +25,15 @@ export class ManagersService {
       throw new InternalServerErrorException("매니저 추가 시 서버 에러");
     }
   }
+
+  async findManager(managerId: number) {
+    try {
+      const result = await this.managerRepository.find({
+        where: { managerId },
+      });
+      return result;
+    } catch (error) {
+      throw new InternalServerErrorException("매니저 조회 시 서버 에러");
+    }
+  }
 }
