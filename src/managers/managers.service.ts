@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Managers } from "./managers.entity";
 import { Repository } from "typeorm";
@@ -32,6 +36,21 @@ export class ManagersService {
         where: { managerId },
       });
       return result;
+    } catch (error) {
+      throw new InternalServerErrorException("매니저 조회 시 서버 에러");
+    }
+  }
+
+  async deleteManager(managerId: number) {
+    try {
+      const manager = await this.managerRepository.find({
+        where: { managerId },
+      });
+      if (!manager) {
+        throw new NotFoundException("매니저가 존재하지 않습니다.");
+      }
+      await this.managerRepository.delete({ managerId });
+      return;
     } catch (error) {
       throw new InternalServerErrorException("매니저 조회 시 서버 에러");
     }
