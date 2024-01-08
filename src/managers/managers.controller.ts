@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -31,6 +32,14 @@ export class ManagersController {
   @Get("/:managerId")
   async findManagerByManagerId(@Param() managerId: number) {
     const result = await this.managerService.findManager(managerId);
+    return result;
+  }
+
+  @ApiOperation({ summary: "매니저 삭제" })
+  @ApiResponse({ status: 200, description: "매니저 삭제 성공" })
+  @Delete("/:managerId")
+  async deleteByManagerId(@Param() managerId: number) {
+    const result = await this.managerService.deleteManager(managerId);
     return result;
   }
 }
