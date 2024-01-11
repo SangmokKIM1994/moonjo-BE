@@ -1,6 +1,13 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import * as bcrypt from "bcrypt";
 import { InternalServerErrorException } from "@nestjs/common";
+import { FirstCategories } from "src/first-categories/first-categories.entity";
 
 @Entity()
 export class Managers {
@@ -30,4 +37,7 @@ export class Managers {
 
   @Column()
   email: string;
+
+  @OneToMany(() => FirstCategories, (firstCategory) => firstCategory.manager)
+  firstCategory: FirstCategories[];
 }

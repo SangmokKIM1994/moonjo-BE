@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Managers } from "src/managers/managers.entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class FirstCategories {
@@ -7,4 +14,11 @@ export class FirstCategories {
 
   @Column()
   firstCategoryName: string;
+
+  @ManyToOne(() => Managers, (manager) => manager.firstCategory)
+  @JoinColumn({ name: "managerId" })
+  manager: Managers;
+
+  @Column()
+  managerId: number;
 }
