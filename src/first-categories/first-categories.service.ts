@@ -12,4 +12,8 @@ export class FirstCategoriesService {
     @InjectRepository(Managers)
     private readonly managerRepository: Repository<Managers>
   ) {}
+
+  async createFirstCategory (userId:number, category:string){
+    
+  }
 }
