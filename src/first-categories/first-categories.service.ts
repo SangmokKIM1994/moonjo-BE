@@ -13,7 +13,13 @@ export class FirstCategoriesService {
     private readonly managerRepository: Repository<Managers>
   ) {}
 
-  async createFirstCategory (userId:number, category:string){
-    
+  async createFirstCategory(managerId: number, category: string) {
+    const result = this.firstCategoriesRepository.create({
+      managerId,
+      firstCategoryName: category,
+    });
+
+    await this.firstCategoriesRepository.save(result);
+    return result;
   }
 }
