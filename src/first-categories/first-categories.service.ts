@@ -22,4 +22,10 @@ export class FirstCategoriesService {
     await this.firstCategoriesRepository.save(result);
     return result;
   }
+
+  async findAllFirstCategory() {
+    const result = this.firstCategoriesRepository.find();
+
+    return result;
+  }
 }
