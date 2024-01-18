@@ -13,6 +13,7 @@ export class FirstCategoriesService {
     private readonly managerRepository: Repository<Managers>
   ) {}
 
+  //첫번째 카테고리 추가
   async createFirstCategory(managerId: number, category: string) {
     const result = this.firstCategoriesRepository.create({
       managerId,
@@ -23,6 +24,7 @@ export class FirstCategoriesService {
     return result;
   }
 
+  //모든 첫번째 카테고리 조회
   async findAllFirstCategory() {
     const result = this.firstCategoriesRepository.find();
 
