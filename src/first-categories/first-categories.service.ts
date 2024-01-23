@@ -32,11 +32,16 @@ export class FirstCategoriesService {
   }
 
   //첫번째 카테고리 수정
-  async modifyFirstCategory(firstCategoryId:number,firstCategoryName:string){
-    const firstCategory = await this.firstCategoriesRepository.findOne({where:{firstCategoryId}})
-    await firstCategory.firstCategoryName = firstCategoryName
+  async modifyFirstCategory(
+    firstCategoryId: number,
+    firstCategoryName: string
+  ) {
+    const firstCategory = await this.firstCategoriesRepository.findOne({
+      where: { firstCategoryId },
+    });
+    firstCategory.firstCategoryName = firstCategoryName;
 
-    await this.firstCategoriesRepository.save(firstCategory)
-    return
+    await this.firstCategoriesRepository.save(firstCategory);
+    return;
   }
 }
