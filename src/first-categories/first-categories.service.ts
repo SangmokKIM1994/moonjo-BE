@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FirstCategories } from "./first-categories.entity";
 import { Managers } from "src/managers/managers.entity";
@@ -15,20 +15,32 @@ export class FirstCategoriesService {
 
   //첫번째 카테고리 추가
   async createFirstCategory(managerId: number, category: string) {
-    const result = this.firstCategoriesRepository.create({
-      managerId,
-      firstCategoryName: category,
-    });
+    try {
+      const result = this.firstCategoriesRepository.create({
+        managerId,
+        firstCategoryName: category,
+      });
 
-    await this.firstCategoriesRepository.save(result);
-    return result;
+      await this.firstCategoriesRepository.save(result);
+      return result;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        "첫번째 카테고리 생성 시 서버 에러"
+      );
+    }
   }
 
   //모든 첫번째 카테고리 조회
   async findAllFirstCategory() {
-    const result = this.firstCategoriesRepository.find();
+    try {
+      const result = this.firstCategoriesRepository.find();
 
-    return result;
+      return result;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        "첫번째 카테고리 조회 시 서버 에러"
+      );
+    }
   }
 
   //첫번째 카테고리 수정
@@ -36,12 +48,18 @@ export class FirstCategoriesService {
     firstCategoryId: number,
     firstCategoryName: string
   ) {
-    const firstCategory = await this.firstCategoriesRepository.findOne({
-      where: { firstCategoryId },
-    });
-    firstCategory.firstCategoryName = firstCategoryName;
+    try {
+      const firstCategory = await this.firstCategoriesRepository.findOne({
+        where: { firstCategoryId },
+      });
+      firstCategory.firstCategoryName = firstCategoryName;
 
-    await this.firstCategoriesRepository.save(firstCategory);
-    return;
+      await this.firstCategoriesRepository.save(firstCategory);
+      return;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        "첫번째 카테고리 수정 시 서버 에러"
+      );
+    }
   }
 }
