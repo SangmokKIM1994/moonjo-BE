@@ -26,4 +26,21 @@ export class FirstCategoriesRepository {
 
     return result;
   }
+
+  async findOneFirstCategory(firstCategoryId: number) {
+    const result = await this.firstCategoriesRepository.findOne({
+      where: { firstCategoryId },
+    });
+
+    return result;
+  }
+  async modifyFirstCategory(
+    targetFirstCategory: FirstCategories,
+    firstCategoryName: string
+  ) {
+    targetFirstCategory.firstCategoryName = firstCategoryName;
+    await this.firstCategoriesRepository.save(targetFirstCategory);
+
+    return;
+  }
 }

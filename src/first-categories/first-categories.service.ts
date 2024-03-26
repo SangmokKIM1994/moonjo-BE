@@ -48,12 +48,14 @@ export class FirstCategoriesService {
     firstCategoryName: string
   ) {
     try {
-      const firstCategory = await this.firstCategoriesRepository.findOne({
-        where: { firstCategoryId },
-      });
-      firstCategory.firstCategoryName = firstCategoryName;
-
-      await this.firstCategoriesRepository.save(firstCategory);
+      const targetFirstCategory =
+        await this.firstCategoriesRepository.findOneFirstCategory(
+          firstCategoryId
+        );
+      await this.firstCategoriesRepository.modifyFirstCategory(
+        targetFirstCategory,
+        firstCategoryName
+      );
       return;
     } catch (error) {
       throw new InternalServerErrorException(
