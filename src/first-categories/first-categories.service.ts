@@ -14,13 +14,12 @@ export class FirstCategoriesService {
   //첫번째 카테고리 추가
   async createFirstCategory(managerId: number, category: string) {
     try {
-      const result = this.firstCategoriesRepository.create({
-        managerId,
-        firstCategoryName: category,
-      });
-
-      await this.firstCategoriesRepository.save(result);
-      return result;
+      const firstCategory =
+        await this.firstCategoriesRepository.createFirstCategory(
+          managerId,
+          category
+        );
+      return firstCategory;
     } catch (error) {
       throw new InternalServerErrorException(
         "첫번째 카테고리 생성 시 서버 에러"
