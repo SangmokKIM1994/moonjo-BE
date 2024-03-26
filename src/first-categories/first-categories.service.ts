@@ -19,6 +19,7 @@ export class FirstCategoriesService {
           managerId,
           category
         );
+
       return firstCategory;
     } catch (error) {
       throw new InternalServerErrorException(
@@ -30,9 +31,10 @@ export class FirstCategoriesService {
   //모든 첫번째 카테고리 조회
   async findAllFirstCategory() {
     try {
-      const result = this.firstCategoriesRepository.find();
+      const allFirstCategory =
+        this.firstCategoriesRepository.findAllFirstCategory;
 
-      return result;
+      return allFirstCategory;
     } catch (error) {
       throw new InternalServerErrorException(
         "첫번째 카테고리 조회 시 서버 에러"

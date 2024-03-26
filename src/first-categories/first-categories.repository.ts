@@ -11,13 +11,19 @@ export class FirstCategoriesRepository {
     private readonly managerRepository: Repository<Managers>
   ) {}
 
-  async createFirstCategory (managerId: number, category: string) {
+  async createFirstCategory(managerId: number, category: string) {
     const result = this.firstCategoriesRepository.create({
       managerId,
       firstCategoryName: category,
     });
 
     await this.firstCategoriesRepository.save(result);
+    return result;
+  }
+
+  async findAllFirstCategory() {
+    const result = this.firstCategoriesRepository.find();
+
     return result;
   }
 }
