@@ -10,4 +10,37 @@ export class FirstCategoriesRepository {
     @InjectRepository(Managers)
     private readonly managerRepository: Repository<Managers>
   ) {}
+
+  async createFirstCategory(managerId: number, category: string) {
+    const result = this.firstCategoriesRepository.create({
+      managerId,
+      firstCategoryName: category,
+    });
+
+    await this.firstCategoriesRepository.save(result);
+    return result;
+  }
+
+  async findAllFirstCategory() {
+    const result = this.firstCategoriesRepository.find();
+
+    return result;
+  }
+
+  async findOneFirstCategory(firstCategoryId: number) {
+    const result = await this.firstCategoriesRepository.findOne({
+      where: { firstCategoryId },
+    });
+
+    return result;
+  }
+  async modifyFirstCategory(
+    targetFirstCategory: FirstCategories,
+    firstCategoryName: string
+  ) {
+    targetFirstCategory.firstCategoryName = firstCategoryName;
+    await this.firstCategoriesRepository.save(targetFirstCategory);
+
+    return;
+  }
 }

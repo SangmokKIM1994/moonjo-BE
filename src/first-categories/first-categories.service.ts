@@ -14,13 +14,13 @@ export class FirstCategoriesService {
   //첫번째 카테고리 추가
   async createFirstCategory(managerId: number, category: string) {
     try {
-      const result = this.firstCategoriesRepository.create({
-        managerId,
-        firstCategoryName: category,
-      });
+      const firstCategory =
+        await this.firstCategoriesRepository.createFirstCategory(
+          managerId,
+          category
+        );
 
-      await this.firstCategoriesRepository.save(result);
-      return result;
+      return firstCategory;
     } catch (error) {
       throw new InternalServerErrorException(
         "첫번째 카테고리 생성 시 서버 에러"
@@ -31,9 +31,10 @@ export class FirstCategoriesService {
   //모든 첫번째 카테고리 조회
   async findAllFirstCategory() {
     try {
-      const result = this.firstCategoriesRepository.find();
+      const allFirstCategory =
+        this.firstCategoriesRepository.findAllFirstCategory;
 
-      return result;
+      return allFirstCategory;
     } catch (error) {
       throw new InternalServerErrorException(
         "첫번째 카테고리 조회 시 서버 에러"
@@ -47,12 +48,14 @@ export class FirstCategoriesService {
     firstCategoryName: string
   ) {
     try {
-      const firstCategory = await this.firstCategoriesRepository.findOne({
-        where: { firstCategoryId },
-      });
-      firstCategory.firstCategoryName = firstCategoryName;
-
-      await this.firstCategoriesRepository.save(firstCategory);
+      const targetFirstCategory =
+        await this.firstCategoriesRepository.findOneFirstCategory(
+          firstCategoryId
+        );
+      await this.firstCategoriesRepository.modifyFirstCategory(
+        targetFirstCategory,
+        firstCategoryName
+      );
       return;
     } catch (error) {
       throw new InternalServerErrorException(
