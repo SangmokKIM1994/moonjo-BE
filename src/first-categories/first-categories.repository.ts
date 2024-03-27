@@ -43,4 +43,10 @@ export class FirstCategoriesRepository {
 
     return;
   }
+
+  async deleteFirstCategory(firstCategoryId: number) {
+    await this.firstCategoriesRepository.delete(firstCategoryId);
+    
+    return;
+  }
 }
