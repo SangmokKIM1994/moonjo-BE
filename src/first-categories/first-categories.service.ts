@@ -63,4 +63,17 @@ export class FirstCategoriesService {
       );
     }
   }
+
+  //첫번째 카테고리 삭제
+  async deleteFirstCategory(firstCategoryId: number) {
+    try {
+      await this.firstCategoriesRepository.deleteFirstCategory(firstCategoryId);
+
+      return;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        "첫번째 카테고리 삭제 시 서버 에러"
+      );
+    }
+  }
 }
