@@ -24,6 +24,7 @@ export class ManagersService {
         email,
       });
       await this.managerRepository.save(result);
+
       return result;
     } catch (error) {
       throw new InternalServerErrorException("매니저 추가 시 서버 에러");
@@ -35,6 +36,7 @@ export class ManagersService {
       const result = await this.managerRepository.find({
         where: { managerId },
       });
+
       return result;
     } catch (error) {
       throw new InternalServerErrorException("매니저 조회 시 서버 에러");
@@ -50,6 +52,7 @@ export class ManagersService {
         throw new NotFoundException("매니저가 존재하지 않습니다.");
       }
       await this.managerRepository.delete({ managerId });
+      
       return;
     } catch (error) {
       throw new InternalServerErrorException("매니저 조회 시 서버 에러");
