@@ -36,13 +36,11 @@ export class ManagersService {
 
   async deleteManager(managerId: number) {
     try {
-      const manager = await this.managerRepository.find({
-        where: { managerId },
-      });
+      const manager = await this.managerRepository.findOneManager(managerId);
       if (!manager) {
         throw new NotFoundException("매니저가 존재하지 않습니다.");
       }
-      await this.managerRepository.delete({ managerId });
+      await this.managerRepository.deleteManager(managerId);
 
       return;
     } catch (error) {

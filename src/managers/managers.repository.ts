@@ -28,6 +28,12 @@ export class ManagerRepository {
       where: { managerId },
     });
 
-    return result
+    return result;
+  }
+
+  async deleteManager(managerId: number) {
+    await this.managerRepository.delete({ managerId });
+
+    return;
   }
 }
