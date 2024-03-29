@@ -26,11 +26,11 @@ export class ManagersService {
 
   async findManager(managerId: number) {
     try {
-      const result = await this.managerRepository.find({
+      const manager = await this.managerRepository.find({
         where: { managerId },
       });
 
-      return result;
+      return manager;
     } catch (error) {
       throw new InternalServerErrorException("매니저 조회 시 서버 에러");
     }

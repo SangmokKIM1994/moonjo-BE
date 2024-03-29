@@ -6,20 +6,28 @@ import { Repository } from "typeorm";
 export class ManagerRepository {
   constructor(
     @InjectRepository(Managers)
-    private readonly managersRepository: Repository<Managers>
+    private readonly managerRepository: Repository<Managers>
   ) {}
 
   async createManager(CreateManagerDto) {
     const { name, id, password, email } = CreateManagerDto;
-    const result = this.managersRepository.create({
+    const result = this.managerRepository.create({
       name,
       id,
       password,
       email,
     });
 
-    await this.managersRepository.save(result);
-    
+    await this.managerRepository.save(result);
+
     return result;
+  }
+
+  async findOneManager(managerId: number) {
+    const result = await this.managerRepository.find({
+      where: { managerId },
+    });
+
+    return result
   }
 }
