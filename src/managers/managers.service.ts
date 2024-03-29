@@ -44,7 +44,7 @@ export class ManagersService {
 
       return;
     } catch (error) {
-      throw new InternalServerErrorException("매니저 조회 시 서버 에러");
+      throw new InternalServerErrorException("매니저 삭제 시 서버 에러");
     }
   }
 }
