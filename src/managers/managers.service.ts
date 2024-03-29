@@ -5,27 +5,20 @@ import {
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Managers } from "./managers.entity";
-import { Repository } from "typeorm";
+import { ManagerRepository } from "./managers.repository";
 
 @Injectable()
 export class ManagersService {
   constructor(
     @InjectRepository(Managers)
-    private readonly managerRepository: Repository<Managers>
+    private readonly managerRepository: ManagerRepository
   ) {}
 
   async createManager(CreateManagerDto) {
     try {
-      const { name, id, password, email } = CreateManagerDto;
-      const result = this.managerRepository.create({
-        name,
-        id,
-        password,
-        email,
-      });
-      await this.managerRepository.save(result);
+      const manager = this.managerRepository.create(CreateManagerDto);
 
-      return result;
+      return manager;
     } catch (error) {
       throw new InternalServerErrorException("매니저 추가 시 서버 에러");
     }
@@ -52,7 +45,7 @@ export class ManagersService {
         throw new NotFoundException("매니저가 존재하지 않습니다.");
       }
       await this.managerRepository.delete({ managerId });
-      
+
       return;
     } catch (error) {
       throw new InternalServerErrorException("매니저 조회 시 서버 에러");
