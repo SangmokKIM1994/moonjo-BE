@@ -16,7 +16,7 @@ export class ManagersService {
 
   async createManager(CreateManagerDto) {
     try {
-      const manager = this.managerRepository.create(CreateManagerDto);
+      const manager = this.managerRepository.createManager(CreateManagerDto);
 
       return manager;
     } catch (error) {
