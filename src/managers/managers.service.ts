@@ -26,9 +26,7 @@ export class ManagersService {
 
   async findManager(managerId: number) {
     try {
-      const manager = await this.managerRepository.find({
-        where: { managerId },
-      });
+      const manager = await this.managerRepository.findOneManager(managerId);
 
       return manager;
     } catch (error) {
