@@ -26,11 +26,9 @@ export class ManagersService {
 
   async findManager(managerId: number) {
     try {
-      const result = await this.managerRepository.find({
-        where: { managerId },
-      });
+      const manager = await this.managerRepository.findOneManager(managerId);
 
-      return result;
+      return manager;
     } catch (error) {
       throw new InternalServerErrorException("매니저 조회 시 서버 에러");
     }
@@ -38,13 +36,11 @@ export class ManagersService {
 
   async deleteManager(managerId: number) {
     try {
-      const manager = await this.managerRepository.find({
-        where: { managerId },
-      });
+      const manager = await this.managerRepository.findOneManager(managerId);
       if (!manager) {
         throw new NotFoundException("매니저가 존재하지 않습니다.");
       }
-      await this.managerRepository.delete({ managerId });
+      await this.managerRepository.deleteManager(managerId);
 
       return;
     } catch (error) {
