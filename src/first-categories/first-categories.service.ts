@@ -1,8 +1,4 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { FirstCategories } from "./first-categories.entity";
-import { Managers } from "src/managers/managers.entity";
-import { Repository } from "typeorm";
 import { FirstCategoriesRepository } from "./first-categories.repository";
 
 @Injectable()
